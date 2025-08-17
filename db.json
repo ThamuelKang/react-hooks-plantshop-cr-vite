@@ -41,6 +41,13 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "id": 1755472541239,
+      "name": "dsdfd",
+      "price": 222,
+      "image": "dsfsdf",
+      "inStock": true
     }
   ]
 }

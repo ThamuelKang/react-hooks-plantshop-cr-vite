@@ -1,33 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
-import { useState, useEffect } from "react";
 
 function PlantPage() {
-  const data = "http://localhost:6001/plants"
-  const [plants, setPlants] = useState([])
-  const [searchTerm, setSearchTerm] = useState("")
+  const [plants, setPlants] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const url = "http://localhost:6001/plants";
 
   useEffect(() => {
-    fetch(data)
-      .then(response => response.json())
-      .then(data => {
-        setPlants(data)
-      })
-
-  }, [])
-
-  const filteredPlants = plants.filter(searchedPlant => {
-    return  searchedPlant.name.toLowerCase().includes(searchTerm.toLowerCase())
-  })
+    fetch(url)
+      .then(res => res.json())
+      .then(data => setPlants(data));
+  }, []);
+  const filteredPlants = plants.filter(plant =>
+    plant.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <main>
       <NewPlantForm onAddPlant={newPlant => setPlants([...plants, newPlant])} />
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <PlantList plants={filteredPlants}
-      />
+      <PlantList plants={filteredPlants} />
     </main>
   );
 }
